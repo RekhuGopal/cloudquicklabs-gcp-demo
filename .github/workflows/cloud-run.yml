@@ -4,6 +4,7 @@ on:
     push:
         branches:
             - main
+            
 env:
     PROJECT_ID: ${{ secrets.PROJECT_ID }}
     RUN_REGION: us-central1
