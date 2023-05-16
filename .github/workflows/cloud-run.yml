@@ -16,16 +16,17 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Checkout
-              uses: actions/checkout@v1
+            - name: Check out repository code
+              uses: actions/checkout@v2
 
-            - uses: GoogleCloudPlatform/github-actions/setup-gcloud@main
+            - name: Login GCP Account
+              uses: GoogleCloudPlatform/github-actions/setup-gcloud@main
               with:
                   version: '275.0.0'
                   service_account_email: ${{ secrets.SA_EMAIL }}
                   service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS}}
 
-            - name: gcloud Set up
+            - name: Gcloud Set up
               run: |
                   gcloud config set project $PROJECT_ID
 
