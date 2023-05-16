@@ -16,27 +16,27 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Check out repository code
-              uses: actions/checkout@v2
+          - name: Check out repository code
+            uses: actions/checkout@v2
 
-            - name: Login GCP Account
-              uses: GoogleCloudPlatform/github-actions/setup-gcloud@main
-              with:
-                  version: '275.0.0'
-                  service_account_email: ${{ secrets.SA_EMAIL }}
-                  service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS}}
+          - name: Login GCP Account
+            uses: GoogleCloudPlatform/github-actions/setup-gcloud@main
+            with:
+                version: '275.0.0'
+                service_account_email: ${{ secrets.SA_EMAIL }}
+                service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS}}
 
-            - name: Gcloud Set up
-              run: |
-                  gcloud config set project $PROJECT_ID
+          - name: Gcloud Set up
+            run: |
+                gcloud config set project $PROJECT_ID
 
-            - name: Build
-              run: |
-                  gcloud builds submit -t gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA
+          - name: Build
+            run: |
+                gcloud builds submit -t gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA
 
-            - name: Deploy
-              run: |
-                  gcloud run deploy $SERVICE_NAME \
-                    --region $RUN_REGION \
-                    --image gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA \
-                    --platform managed
+          - name: Deploy
+            run: |
+                gcloud run deploy $SERVICE_NAME \
+                  --region $RUN_REGION \
+                  --image gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA \
+                  --platform managed
