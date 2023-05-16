@@ -22,10 +22,10 @@ jobs:
               repository: RekhuGopal/cloudquicklabs-gcp-demo
 
           - name: Login GCP Account
-            uses: GoogleCloudPlatform/github-actions/setup-gcloud@main
+            uses: google-github-actions/setup-gcloud@v1
             with:
-                version: '275.0.0'
-                service_account_email: ${{ secrets.SA_EMAIL }}
+                version: '>=363.0.0'
+                service_account: ${{ secrets.SA_EMAIL }}
                 service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS}}
 
           - name: Gcloud Set up
