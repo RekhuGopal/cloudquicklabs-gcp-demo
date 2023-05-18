@@ -22,7 +22,7 @@ jobs:
               repository: RekhuGopal/cloudquicklabs-gcp-demo
 
           - name: Login GCP Account
-            uses: google-github-actions/auth@v0.4.0
+            uses: google-github-actions/auth@v1
             with:
                 credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS}}
 
@@ -37,4 +37,4 @@ jobs:
           - uses: 'google-github-actions/deploy-cloudrun@v1'
             with:
               image: gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA
-              service: $SERVICE_NAME
+              service: cloudquicklabs-gcp-cloudrun
