@@ -34,9 +34,7 @@ jobs:
             run: |
                 gcloud builds submit -t gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA
 
-          - name: Deploy
-            run: |
-                gcloud run deploy $SERVICE_NAME \
-                  --region $RUN_REGION \
-                  --image gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA \
-                  --platform managed
+          - uses: 'google-github-actions/deploy-cloudrun@v1'
+            with:
+              image: gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA
+              service: $SERVICE_NAME
